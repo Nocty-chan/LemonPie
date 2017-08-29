@@ -4,6 +4,8 @@ from . import views
 
 app_name = 'resumebuilder'
 urlpatterns = [
+    url(r'^$', views.home, name='home'),
+
     url(r'^groups/$', views.AllGroupsView.as_view(), name='all_groups'),
     url(r'^groups/add/$', views.add_new_group, name='add_new_group'),
     url(r'^groups/(?P<group_id>[0-9]+)/$', views.group_view, name='group_view'),
