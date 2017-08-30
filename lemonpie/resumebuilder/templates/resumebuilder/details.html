@@ -1,9 +1,12 @@
+{% extends "core/body.html" %}
+
+{% block page_title %}
+{{cv_general.name}} <small> by {{cv_general.user}} </small>
+{% endblock %}
+
+{% block content %}
 {% load personal_view %}
-
 {% if cv_general %}
-<h1> {{cv_general.name}} </h1> by {{cv_general.user}} </br>
-
-
 <form action="{% url 'resumebuilder:modify_cv' cv_general.id %}" method="post">
 {% csrf_token %}
  <label>Name of CV</label>
@@ -47,3 +50,4 @@
   <input type="submit" value="Add group to CV" />
   </form>
 {% endif %}
+{% endblock %}

@@ -16,12 +16,9 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
       <li>
-        <a href="#">
+        <a href="{% url 'resumebuilder:all_cvs' %}">
           <i class="fa fa-edit text-aqua"></i>
           <span>Resumes</span>
-          <span class="pull-right-container">
-            <span class="label label-primary pull-right">4</span>
-          </span>
         </a>
       </li>
       <li class="treeview">
@@ -32,8 +29,8 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Groups </a></li>
-          <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Items </a></li>
+          <li><a href="{% url 'resumebuilder:all_groups' %}"><i class="fa fa-circle-o"></i> Groups </a></li>
+          <li><a href="{% url 'resumebuilder:all_entrys' %}"><i class="fa fa-circle-o"></i> Items </a></li>
         </ul>
       </li>
       <li class="header">LABELS</li>

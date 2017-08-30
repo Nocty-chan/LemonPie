@@ -1,5 +1,10 @@
-<h1> List of All Entries </h1>
+{% extends "core/body.html" %}
 
+{% block page_title %}
+List of All Entries
+{% endblock %}
+
+{% block content %}
 {% if cv_entry_list %}
     <ul>
     {% for cv_entry in cv_entry_list %}
@@ -26,3 +31,4 @@
 <br><br>
 <input type="submit" value="Add" />
 </form>
+{% endblock %}

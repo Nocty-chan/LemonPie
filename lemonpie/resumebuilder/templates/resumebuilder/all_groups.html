@@ -1,5 +1,10 @@
-<h1> List of All Groups </h1>
+{% extends "core/body.html" %}
 
+{% block page_title %}
+List of All Groups
+{% endblock %}
+
+{% block content %}
 {% if group_entry_list %}
     <ul>
     {% for group_entry in group_entry_list %}
@@ -18,3 +23,4 @@
 {% csrf_token %}
 <input type="submit" value="Add" />
 </form>
+{% endblock %}

@@ -1,5 +1,10 @@
-<h1> List of All CVs </h1>
+{% extends "core/body.html" %}
 
+{% block page_title %}
+List of All CVs
+{% endblock %}
+
+{% block content %}
 {% if cv_general_list %}
     <ul>
     {% for cv_general in cv_general_list %}
@@ -14,3 +19,5 @@
 {% csrf_token %}
 <input type="submit" value="Add" />
 </form>
+
+{% endblock %}

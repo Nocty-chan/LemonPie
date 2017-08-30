@@ -1,7 +1,14 @@
+{% extends "core/body.html" %}
+
+{% block page_title %}
+{{cv_entry.get_class_name}} - {{cv_entry.name}} - {{cv_entry.id}}
+{% endblock %}
+
+{% block content %}
+
 {% load personal_view %}
 
 <div class={{cv_entry.get_class_name}}>
-  <h3> {{cv_entry.get_class_name}} - {{cv_entry.name}} - {{cv_entry.id}} </h3>
       {% return_template cv_entry enable_modification form %}
 </div>
 
@@ -17,3 +24,4 @@
 </form>
 
 {% endif %}
+{% enblock %}
