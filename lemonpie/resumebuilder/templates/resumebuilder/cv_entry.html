@@ -4,6 +4,12 @@
 {{cv_entry.get_class_name}} - {{cv_entry.name}} - {{cv_entry.id}}
 {% endblock %}
 
+{% block breadcrumb %}
+<li> <a href = {% url 'resumebuilder:all_entrys' %}> All Entries </a> </li>
+<li class="active"> {{ cv_entry.name }} </li>
+{% endblock %}
+
+
 {% block content %}
 {% load personal_view %}
 

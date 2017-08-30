@@ -4,7 +4,12 @@
   {{ group_entry.name }} - {{ group_entry.get_group_type_str }}
 {% endblock %}
 
+{% block breadcrumb %}
+<li> <a href = {% url 'resumebuilder:all_groups' %}> All Groups </a> </li>
+<li class="active"> {{ group_entry.name }} </li>
+{% endblock %}
+
 {% block content %}
   {% load personal_view %}
-  {% return_group_template group_entry False %}
+  {% return_group_template group_entry True %}
 {% endblock %}
