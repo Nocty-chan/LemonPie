@@ -1,4 +1,5 @@
 {% extends "core/body.html" %}
+{% load static %}
 
 {% block page_title %}
 List of All CVs
@@ -9,19 +10,37 @@ List of All CVs
 {% endblock %}
 
 {% block content %}
-{% if cv_general_list %}
-    <ul>
+  {% if cv_general_list %}
+    <div class="row">
     {% for cv_general in cv_general_list %}
-        <li><a href="{% url 'resumebuilder:cv_view' cv_general.id %}">{{ cv_general.name }}</a></li>
+      <div class="col-sm-2 col-md-2">
+        <div class="thumbnail">
+          <img src={% static "images/resume_preview.svg" %} alt="...">
+          <div class="caption">
+            <h3>{{ cv_general.name }}</h3>
+            <p>
+              <a href="{% url 'resumebuilder:cv_view' cv_general.id %}" class="btn" role="button">
+                <i class="fa fa-edit"></i>
+                <span>Edit</span>
+              </a>
+              <a href="#" class="btn" role="button">
+                <i class="fa fa-file-pdf-o"></i>
+                <span>PDF</span>
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
     {% endfor %}
-    </ul>
-{% else %}
-    <p>No CVs are available.</p>
-{% endif %}
+    </div>
 
-<form action="{% url 'resumebuilder:add_new_cv' %}" method="post">
-{% csrf_token %}
-<input type="submit" value="Add" />
-</form>
+  {% else %}
+    <p>No CVs are available.</p>
+  {% endif %}
+
+  <form action="{% url 'resumebuilder:add_new_cv' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Add" />
+  </form>
 
 {% endblock %}
