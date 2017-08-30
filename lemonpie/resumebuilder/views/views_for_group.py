@@ -38,7 +38,7 @@ def group_view(request, group_id):
         'cv_entries': list_of_entries_for_group(group_entry),
         'enable_modification': True,
     }
-    return render(request, 'resumebuilder/group_entry.html', context)
+    return render(request, 'resumebuilder/group_entry_base.html', context)
 
 
 def modify_group(request, group_id):

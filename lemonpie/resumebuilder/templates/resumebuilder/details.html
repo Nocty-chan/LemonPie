@@ -38,6 +38,7 @@
 
   <!--  DISPLAYING GROUPS THAT ARE INSIDE RESUME -->
   {% for cvgrouppairing in cv_group_pairings %}
+    <h3> {{ cvgrouppairing.group_entry.name }} </h3>
     {% return_group_template cvgrouppairing.group_entry False %}
     <form action="{% url 'resumebuilder:delete_group_from_cv' cvgrouppairing.id %}" method="post">
       {% csrf_token %}

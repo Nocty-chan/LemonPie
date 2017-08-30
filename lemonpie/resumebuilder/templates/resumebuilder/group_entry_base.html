@@ -1,0 +1,10 @@
+{% extends "core/body.html" %}
+
+{% block page_title %}
+  {{ group_entry.name }} - {{ group_entry.get_group_type_str }}
+{% endblock %}
+
+{% block content %}
+  {% load personal_view %}
+  {% return_group_template group_entry False %}
+{% endblock %}
