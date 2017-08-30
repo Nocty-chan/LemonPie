@@ -9,16 +9,42 @@ List of All Entries
 {% endblock %}
 
 {% block content %}
+
 {% if cv_entry_list %}
-    <ul>
-    {% for cv_entry in cv_entry_list %}
-      <li><a href="{% url 'resumebuilder:entry_view' cv_entry.id %}">{{ cv_entry.name }}</a></li>
-      <form action="{% url 'resumebuilder:delete_entry' cv_entry.id %}" method="post">
-      {% csrf_token %}
-      <input type="submit" value="Delete Entry" />
-      </form>
-    {% endfor %}
-    </ul>
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title"> Entries </h3>
+  </div>
+  <div class="box-body table-responsive no-padding">
+    <table class="table table-hover" role="grid">
+      <thead>
+        <tr>
+          <th> Type </th>
+          <th> Name </th>
+          <th> Options </th>
+        </tr>
+      </thead>
+      <tbody
+        {% for cv_entry in cv_entry_list %}
+          <tr>
+            <th> {{ cv_entry.get_class_name }} </th>
+            <th> {{ cv_entry.name }} </th>
+            <th>
+              <button type="button" class="btn" data-toggle="modal" data-target="#deleteModal{{cv_entry.id}}">
+                <i class="fa fa-trash"></i>
+                <span>Delete</span>
+              </button>
+              <a href="{% url 'resumebuilder:entry_view' cv_entry.id %}" class="btn" role="button">
+                <i class="fa fa-edit"></i>
+                <span>Modify</span>
+              </a>
+            </th>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 {% else %}
     <p>No Entries are available.</p>
 {% endif %}
@@ -35,4 +61,34 @@ List of All Entries
 <br><br>
 <input type="submit" value="Add" />
 </form>
+
+{% if cv_entry_list %}
+{% for cv_entry in cv_entry_list %}
+<!-- Modal -->
+<div class="modal modal-danger fade" id="deleteModal{{cv_entry.id}}" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="pull-right close" data-dismiss="modal">x</button>
+        <h4 class="modal-title"> Delete Entry</h4>
+      </div>
+      <div class="modal-body">
+        <p>This will permanently delete the entry without touching to groups or CVs in which the entry has been added.
+          Are you sure you want to delete this entry?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-dismiss="modal"> Cancel </button>
+        <a type="button" class="btn btn-outline pull-left"
+        href="{% url 'resumebuilder:delete_entry' cv_entry.id %}">
+        Confirm
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+{% endfor %}
+{% endif %}
+
 {% endblock %}
