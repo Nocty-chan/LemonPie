@@ -13,7 +13,7 @@ def return_template(cv_entry, enable_modification, form):
         'enable_modification': enable_modification,
         'form': form,
     }
-    #if statements that choose what 'template' should be
+    # if statements that choose what 'template' should be
     if cv_entry.get_class_name() == 'PersonalEntry':
         template = 'personal_entry.html'
     if cv_entry.get_class_name() == 'WorkEntry':
@@ -24,7 +24,7 @@ def return_template(cv_entry, enable_modification, form):
         template = 'skill_entry.html'
     if cv_entry.get_class_name() == 'EducationEntry':
         template = 'education_entry.html'
-    #render the template
+    # render the template
     return render_to_string(template, context)
 
 @register.simple_tag
