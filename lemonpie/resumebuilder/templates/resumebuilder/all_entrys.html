@@ -24,7 +24,7 @@ List of All Entries
           <th> Options </th>
         </tr>
       </thead>
-      <tbody
+      <tbody>
         {% for cv_entry in cv_entry_list %}
           <tr>
             <th> {{ cv_entry.get_class_name }} </th>
@@ -49,17 +49,39 @@ List of All Entries
     <p>No Entries are available.</p>
 {% endif %}
 
+<button class="btn btn-app" data-toggle="modal" data-target="#addModal">
+  <i class="fa fa-plus"></i>
+  <span> New Entry </span>
+</button>
+
+<!-- Add new entry Modal -->
 <form action="{% url 'resumebuilder:add_new_entry' %}" method="post">
-{% csrf_token %}
-<select name="entry_type">
-  <option value="PersonalEntry">Personal Entry</option>
-  <option value="SkillEntry">Skill Entry</option>
-  <option value="WorkEntry">Work Entry</option>
-  <option value="EducationEntry">Education Entry</option>
-  <option value="HobbyEntry">Hobby Entry</option>
-</select>
-<br><br>
-<input type="submit" value="Add" />
+<div class="modal fade" id="addModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="pull-right close" data-dismiss="modal">x</button>
+        <h4 class="modal-title"> New Entry</h4>
+      </div>
+      <div class="modal-body">
+        {% csrf_token %}
+        <select name="entry_type">
+          <option value="PersonalEntry">Personal Entry</option>
+          <option value="SkillEntry">Skill Entry</option>
+          <option value="WorkEntry">Work Entry</option>
+          <option value="EducationEntry">Education Entry</option>
+          <option value="HobbyEntry">Hobby Entry</option>
+        </select>
+        <br><br>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" type="submit"> Confirm </button>
+        <button type="button" class="btn" data-dismiss="modal"> Cancel </button>
+    </div>
+  </div>
+</div>
+</div>
 </form>
 
 {% if cv_entry_list %}
