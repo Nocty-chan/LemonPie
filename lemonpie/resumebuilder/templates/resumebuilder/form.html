@@ -1,19 +1,24 @@
-{% extends "core/body.html" %}
-
-{% block page_title %}
-Modify entry_view
-{% endblock %}
-
-{% block breadcrumb %}
-<li> <a href = {% url 'resumebuilder:all_entrys' %}> All Entries </a> </li>
-<li> <a href = "{% url 'resumebuilder:entry_view' cv_entry.id %}"> {{ cv_entry.name }} </a> </li>
-<li class="active"> Modify </li>
-{% endblock %}
-
-{% block content %}
 <form action="{% url 'resumebuilder:modify_entry' cv_entry.id %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" />
+{% csrf_token %}
+<!-- Modal -->
+<div class="modal fade" id="editModal{{cv_entry.id}}" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="pull-right close" data-dismiss="modal">x</button>
+        <h4 class="modal-title">Edit Entry</h4>
+      </div>
+      <div class="modal-body">
+        {{ cv_entry.get_form }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" data-dismiss="modal"> Cancel </button>
+        <button type="submit" class="btn pull-left">
+        Confirm Changes
+        </button>
+    </div>
+  </div>
+</div>
+</div>
 </form>
-{% endblock %}

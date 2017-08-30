@@ -34,9 +34,13 @@ List of All Entries
                 <i class="fa fa-trash"></i>
                 <span>Delete</span>
               </button>
-              <a href="{% url 'resumebuilder:entry_view' cv_entry.id %}" class="btn" role="button">
+              <button type="button" class="btn" data-toggle="modal" data-target="#editModal{{cv_entry.id}}">
                 <i class="fa fa-edit"></i>
                 <span>Modify</span>
+              </button>
+
+              <a href="{% url 'resumebuilder:entry_view' cv_entry.id %}" class="btn" role="button">
+                <i class="fa fa-edit"></i>
               </a>
             </th>
           </tr>
@@ -56,6 +60,7 @@ List of All Entries
 
 <!-- Add new entry Modal -->
 <form action="{% url 'resumebuilder:add_new_entry' %}" method="post">
+
 <div class="modal fade" id="addModal" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -84,6 +89,8 @@ List of All Entries
 </div>
 </form>
 
+
+<!-- Delete modal -->
 {% if cv_entry_list %}
 {% for cv_entry in cv_entry_list %}
 <!-- Modal -->
@@ -110,6 +117,10 @@ List of All Entries
   </div>
 </div>
 </div>
+
+{% load personal_view %}
+{% return_modification_form_template cv_entry %}
+
 {% endfor %}
 {% endif %}
 

@@ -6,6 +6,14 @@ from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
 from polymorphic.models import PolymorphicModel
 
+from .forms import (
+    SkillForm,
+    PersonalForm,
+    WorkForm,
+    EducationForm,
+    HobbyForm,
+)
+
 # Create your models here.
 COLUMN_CHOICES = (
   (1, 1),
@@ -51,6 +59,49 @@ class CVEntry(PolymorphicModel):
         for list_elm in all_list_elements:
             list_elm.delete()
         super(CVEntry, self).delete()
+    def get_activity_initial(self):
+        return {
+        'name': self.name,
+        'location_city': self.location_city,
+        'location_country': self.location_country,
+        'date_begin': self.date_begin,
+        'date_end': self.date_end,
+        'description': self.description
+        }
+
+    def get_form(self):
+        if self.get_class_name() == "PersonalEntry":
+            return PersonalForm(initial={
+            'name': self.name,
+            'family_name': self.family_name,
+            'given_name': self.given_name,
+            'phone_number': self.phone_number,
+            'email_address': self.email_address,
+            })
+        elif self.get_class_name() == "SkillEntry":
+            return SkillForm(initial={
+            'name': self.name,
+            'skill_name': self.skill_name,
+            'skill_level': self.skill_level
+            })
+        else:
+            if self.get_class_name() == "WorkEntry":
+                activity_initial_dict = self.get_activity_initial()
+                activity_initial_dict['job_title'] = self.job_title
+                activity_initial_dict['company_name'] = self.company_name
+                return WorkForm(initial=activity_initial_dict)
+            elif self.get_class_name() == "EducationEntry":
+                activity_initial_dict = self.get_activity_initial()
+                activity_initial_dict['diploma_title'] = self.diploma_title
+                activity_initial_dict['school_name'] = self.school_name
+                return EducationForm(initial=activity_initial_dict)
+            elif self.get_class_name() == "HobbyEntry":
+                activity_initial_dict = self.get_activity_initial()
+                activity_initial_dict['hobby_name'] = self.hobby_name
+                activity_initial_dict['hobby_institution'] = self.hobby_institution
+                return HobbyForm(initial=activity_initial_dict)
+            else:
+                return None
 
 class GroupEntry(CVEntry):
     def get_list_head(self):

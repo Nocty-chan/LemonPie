@@ -2,7 +2,13 @@ from django import template
 from django.template.loader import render_to_string
 
 from ..views import list_of_entries_for_group
-
+from ..forms import (
+    SkillForm,
+    PersonalForm,
+    WorkForm,
+    EducationForm,
+    HobbyForm,
+)
 register = template.Library()
 
 @register.simple_tag
@@ -34,5 +40,14 @@ def return_group_template(group_entry, enable_modification):
         'group_entry':group_entry,
         'cv_entries':list_of_entries_for_group(group_entry),
         'enable_modification':enable_modification,
+    }
+    return render_to_string(template, context)
+
+
+@register.simple_tag
+def return_modification_form_template(cv_entry):
+    template = 'form.html'
+    context= {
+        'cv_entry':cv_entry
     }
     return render_to_string(template, context)
