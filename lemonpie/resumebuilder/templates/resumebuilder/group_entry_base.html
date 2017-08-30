@@ -10,6 +10,5 @@
 {% endblock %}
 
 {% block content %}
-  {% load personal_view %}
-  {% return_group_template group_entry True %}
+  {% include "resumebuilder/group_entry.html" %}
 {% endblock %}
