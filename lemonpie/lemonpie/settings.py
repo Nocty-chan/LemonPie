@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_countries',
-    'floppyforms',
     'phonenumber_field',
     'polymorphic',
     'resumebuilder.apps.ResumeBuilderConfig',

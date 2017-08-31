@@ -1,6 +1,5 @@
 <!-- Modal -->
 <!-- TODO: Load data with Javascript -->
-
 <div class="modal fade" id="editModal{{cv_entry.id}}" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -10,16 +9,7 @@
         <h4 class="modal-title">Edit Entry</h4>
       </div>
       <div class="modal-body">
-        {% for field in cv_entry.get_form %}
-          <div class="form-group">
-            {{ field.errors }}
-            <label> {{ field.label }} </label>
-              {{ field }}
-            {% if field.help_text %}
-              <p class="help">{{ field.help_text|safe }}</p>
-            {% endif %}
-          </div>
-        {% endfor %}
+        {{ cv_entry.get_form.as_p }}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-dismiss="modal"> Cancel </button>

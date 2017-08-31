@@ -3,18 +3,10 @@ from django import forms
 from phonenumber_field.formfields import PhoneNumberField
 from django_countries import countries
 from django_countries.fields import LazyTypedChoiceField
-from .widgets import (
-    EmailWidget,
-    TextWidget,
-    DatePickerWidget,
-    PhoneWidget,
-    CountryPickerWidget,
-    SkillLevelWidget)
 
 class EntryForm(forms.Form):
     name = forms.CharField(
-        max_length=50,
-        widget=TextWidget)
+        max_length=50)
 
 
 class SkillForm(EntryForm):
@@ -26,73 +18,47 @@ class SkillForm(EntryForm):
       (5, 5)
     )
     skill_name = forms.CharField(
-        max_length=50,
-        widget=TextWidget)
+        max_length=50)
     skill_level = forms.IntegerField(
         min_value=1,
-        max_value=5,
-        widget=SkillLevelWidget(choices=SKILL_LEVEL_CHOICES),
-        )
+        max_value=5)
 
 
 class PersonalForm(EntryForm):
     family_name = forms.CharField(
-        max_length=50,
-        widget=TextWidget)
+        max_length=50)
     given_name = forms.CharField(
-        max_length=50,
-        widget=TextWidget)
-    phone_number = PhoneNumberField(
-        widget=PhoneWidget
-    )
+        max_length=50)
+    phone_number = PhoneNumberField()
     email_address = forms.EmailField(
-        max_length=50,
-        widget=EmailWidget)
+        max_length=50)
 
 
 class ActivityForm(EntryForm):
     location_city = forms.CharField(
-        max_length=50,
-        widget=TextWidget)
+        max_length=50)
     location_country = LazyTypedChoiceField(
-        choices=countries,
-        widget=CountryPickerWidget,
-    )
-    date_begin = forms.DateField(
-      widget=DatePickerWidget
-    )
-    date_end = forms.DateField(
-      widget=DatePickerWidget
-    )
+        choices=countries)
+    date_begin = forms.DateField()
+    date_end = forms.DateField()
     description = forms.CharField(
-        max_length=50,
-        widget=forms.Textarea(
-            attrs={
-              'class': "form-control"
-            }
-        ))
+        max_length=50)
 
 
 class WorkForm(ActivityForm):
     job_title = forms.CharField(
-        max_length=50,
-        widget=TextWidget)
+        max_length=50)
     company_name = forms.CharField(
-        max_length=50,
-        widget=TextWidget)
+        max_length=50)
 
 class EducationForm(ActivityForm):
     diploma_title = forms.CharField(
-        max_length=50,
-        widget=TextWidget)
+        max_length=50)
     school_name = forms.CharField(
-        max_length=50,
-        widget=TextWidget)
+        max_length=50)
 
 class HobbyForm(ActivityForm):
     hobby_name = forms.CharField(
-        max_length=50,
-        widget=TextWidget)
+        max_length=50)
     hobby_institution = forms.CharField(
-        max_length=50,
-        widget=TextWidget)
+        max_length=50)
