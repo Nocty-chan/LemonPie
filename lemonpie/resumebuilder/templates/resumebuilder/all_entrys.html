@@ -115,7 +115,7 @@ List of All Entries
 </div>
 
 {% load personal_view %}
-  <form action="{% url 'resumebuilder:modify_entry' cv_entry.id %}" method="post">
+  <form action="{% url 'resumebuilder:modify_entry' cv_entry.id %}" role="form" method="post">
     {% csrf_token %}
     {% return_modification_form_template cv_entry %}
   </form>

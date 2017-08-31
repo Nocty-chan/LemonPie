@@ -8,7 +8,18 @@
         <h4 class="modal-title">Edit Entry</h4>
       </div>
       <div class="modal-body">
-        {{ cv_entry.get_form }}
+        {% for field in cv_entry.get_form %}
+          <div class="form-group">
+            {{ field.errors }}
+            <label> {{ field.label }} </label>
+            <span class="">
+              {{ field }}
+            </span>
+            {% if field.help_text %}
+              <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-dismiss="modal"> Cancel </button>
