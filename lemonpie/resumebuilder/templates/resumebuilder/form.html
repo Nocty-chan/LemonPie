@@ -1,4 +1,6 @@
 <!-- Modal -->
+<!-- TODO: Load data with Javascript -->
+
 <div class="modal fade" id="editModal{{cv_entry.id}}" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -12,9 +14,7 @@
           <div class="form-group">
             {{ field.errors }}
             <label> {{ field.label }} </label>
-            <span class="">
               {{ field }}
-            </span>
             {% if field.help_text %}
               <p class="help">{{ field.help_text|safe }}</p>
             {% endif %}
