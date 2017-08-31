@@ -2,13 +2,6 @@ from django import template
 from django.template.loader import render_to_string
 
 from ..views import list_of_entries_for_group
-from ..forms import (
-    SkillForm,
-    PersonalForm,
-    WorkForm,
-    EducationForm,
-    HobbyForm,
-)
 register = template.Library()
 
 @register.simple_tag

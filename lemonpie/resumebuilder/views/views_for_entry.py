@@ -82,4 +82,4 @@ def add_new_entry(request):
     cv_entry.save()
     cv_entry.name = cv_entry.get_class_name() + str(cv_entry.id)
     cv_entry.save()
-    return entry_view(request, cv_entry.id)
+    return HttpResponseRedirect(reverse('resumebuilder:all_entrys', args=()))
