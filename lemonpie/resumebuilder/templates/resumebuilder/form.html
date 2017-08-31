@@ -3,13 +3,11 @@
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
-      <form action="{% url 'resumebuilder:modify_entry' cv_entry.id %}" method="post">
       <div class="modal-header">
         <button type="button" class="pull-right close" data-dismiss="modal">x</button>
         <h4 class="modal-title">Edit Entry</h4>
       </div>
       <div class="modal-body">
-        {% csrf_token %}
         {{ cv_entry.get_form }}
       </div>
       <div class="modal-footer">
@@ -18,7 +16,6 @@
         Confirm Changes
         </button>
     </div>
-  </form>
   </div>
 </div>
 </div>

@@ -114,30 +114,11 @@ List of All Entries
 </div>
 </div>
 
-<!-- Edition Modal -->
-<div class="modal fade" id="editModal{{cv_entry.id}}" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <form action="{% url 'resumebuilder:modify_entry' cv_entry.id %}" method="post">
-      <div class="modal-header">
-        <button type="button" class="pull-right close" data-dismiss="modal">x</button>
-        <h4 class="modal-title">Edit Entry</h4>
-      </div>
-      <div class="modal-body">
-        {% csrf_token %}
-        {{ cv_entry.get_form }}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn" data-dismiss="modal"> Cancel </button>
-        <button type="submit" class="btn pull-left">
-        Confirm Changes
-        </button>
-    </div>
+{% load personal_view %}
+  <form action="{% url 'resumebuilder:modify_entry' cv_entry.id %}" method="post">
+    {% csrf_token %}
+    {% return_modification_form_template cv_entry %}
   </form>
-  </div>
-</div>
-</div>
 {% endfor %}
 {% endif %}
 
